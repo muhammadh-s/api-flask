@@ -5,7 +5,6 @@
 ```
 pip install -r requirements.txt
 python app.py
-
 ```
 
 ## Description
@@ -18,7 +17,7 @@ retrieve a list of notes.
 To use POST on your local enivronment,
 ```
 http://127.0.0.1:5000/task/replace-yours
-
+```
 To use GET,
 ```
 http://127.0.0.1:5000/tasks 
