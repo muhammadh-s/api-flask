@@ -26,8 +26,8 @@ class TasksList(Resource):
         return {'tasks': tasks}
 
 
-api.add_resource(Task, '/task/<string:title>')
-api.add_resource(TasksList, '/tasks')
+api.add_resource(Task, '/api/task/<string:title>')
+api.add_resource(TasksList, '/api/tasks')
 
-
-app.run(port=5000)
+if __name__ = '__main__'
+    app.run(debug=True)
