@@ -29,5 +29,5 @@ class TasksList(Resource):
 api.add_resource(Task, '/api/task/<string:title>')
 api.add_resource(TasksList, '/api/tasks')
 
-if __name__ = '__main__':
+if __name__ == '__main__':
     app.run(port=5000)
