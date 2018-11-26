@@ -1,33 +1,28 @@
-from flask import Flask, request
-from flask_restful import Resource, Api
+import os
+
+from flask import Flask
+from flask_restful import Api
+
+from resources.note import Note, NotesList
 
 app = Flask(__name__)
+
+app.config['DEBUG'] = True
+
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 api = Api(app)
 
-tasks = []
-
-class Task(Resource):
-    def get(self, title):
-        task = next(filter(lambda x: x['title'] == title, tasks), None)
-        return {'task': task}, 200 if task else 404
-
-    def post(self, title):
-        if next(filter(lambda x: x['title'] == title, tasks), None):
-            return {'Message': "The task '{}' already exists.".format(title)}, 400
-
-        data = request.get_json()
-        task = {'title': title, 'details': data['details']}
-        tasks.append(task)
-        return task, 201
-
-
-class TasksList(Resource):
-    def get(self):
-        return {'tasks': tasks}
-
-
-api.add_resource(Task, '/api/task/<string:title>')
-api.add_resource(TasksList, '/api/tasks')
+api.add_resource(Note, '/note/<string:title>')
+api.add_resource(NotesList, '/notes')
 
 if __name__ == '__main__':
-    app.run(port=5000)
+    from db import db
+    db.init_app(app)
+
+    if app.config['DEBUG']:
+        @app.before_first_request
+        def create_tables():
+            db.create_all()
+
+app.run(port=5000)
