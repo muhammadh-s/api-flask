@@ -26,3 +26,10 @@ Note: Use POST method with an application like POSTMAN, in order to add body
 ## Implementation
 
 This API is built using Flask, FlaskRESTful, SQLAlchemy, hence uses Python-3.7.1
+
+## Try now
+
+GET
+```
+https://rest-api-flask-mhs.herokuapp.com/notes
+```
