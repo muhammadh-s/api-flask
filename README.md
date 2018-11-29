@@ -1,6 +1,6 @@
 ## Try now
 
-GET
+GET:
 ```
 https://rest-api-flask-mhs.herokuapp.com/notes
 ```
@@ -12,11 +12,11 @@ This API have POST and GET methods to emulate a note taking app.
 The POST method adds a "title" and "details" to the database and GET method
 retrieve a list of notes.
 
-To use POST on your local environment,
+To use POST on your local environment:
 ```
 http://127.0.0.1:5000/note/replace-yours
 ```
-To use GET,
+To use GET:
 ```
 http://127.0.0.1:5000/notes
 ```
