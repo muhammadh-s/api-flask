@@ -1,5 +1,3 @@
-# REST API
-
 ## Description
 
 This API have POST and GET methods to emulate a note taking app.
