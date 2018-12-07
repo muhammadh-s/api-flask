@@ -1,0 +1,34 @@
+openapi: "3.0.2"
+
+info:
+  title: "Notes REST API"
+  description: "Save notes with the title and details. Then, also, retrieve a list of saved notes."
+  version: "1.0"
+  contact:
+    name: "Github"
+    url: "https://github.com/muhammadh-s/rest-api-flask"
+
+
+servers:
+- url: "https://rest-api-flask-mhs.herokuapp.com/"
+
+paths:
+  /notes:
+    get:
+      tags:
+      - Notes
+      summary: "Call list of notes"
+      description: ""
+      operationId: note
+
+      responses:
+        200:
+          description: Successful response
+
+
+security:
+- app_id: []
+
+tags:
+  - name: Notes
+    description: ""
