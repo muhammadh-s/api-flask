@@ -2,3 +2,4 @@ Flask
 Flask-RESTful
 Flask-SQLAlchemy
 gunicorn
+flask_cors
