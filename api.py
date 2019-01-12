@@ -1,14 +1,19 @@
 from flask import Flask
 from flask_restful import reqparse, abort, Api, Resource
+from flask_cors import CORS
 
 app = Flask(__name__)
 api = Api(app)
+cors = CORS(app)
 
-TODOS = {
-    'todo1': {'task': 'build an API'},
-    'todo2': {'task': '?????'},
-    'todo3': {'task': 'profit!'},
-}
+TODOS = [
+    {'task': 'build an API'},
+    {'task':  'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod te'},
+    {'task': 'profit!'},
+    {'task': 'profit!'},
+    {'task': 'profit!'},
+    {'task': 'profit!'},
+]
 
 
 def abort_if_todo_doesnt_exist(todo_id):
@@ -40,12 +45,12 @@ class TodoList(Resource):
     def get(self):
         return TODOS
 
-    def post(self):
-        args = parser.parse_args()
-        todo_id = int(max(TODOS.keys()).lstrip('todo')) + 1
-        todo_id = 'todo%i' % todo_id
-        TODOS[todo_id] = {'task': args['task']}
-        return TODOS[todo_id], 201
+    # def post(self):
+    #     args = parser.parse_args()
+    #     todo_id = int(max(TODOS.keys()).lstrip('todo')) + 1
+    #     todo_id = 'todo%i' % todo_id
+    #     TODOS[todo_id] = {'task': args['task']}
+    #     return TODOS[todo_id], 201
 
 ##
 ## Actually setup the Api resource routing here
