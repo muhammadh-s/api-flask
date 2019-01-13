@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import CardList from '../components/CardList';
-// import SearchBox from '../components/SearchBox';
-// import Scroll from '../components/Scroll';
+import InsertBox from '../components/InsertBox';
+import SubmitButton from '../components/SubmitButton';
 import './App.css';
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
-      todos: []
-      // searchfield: ''
+      todos: [],
+      insertField: '',
     }
   }
 
@@ -20,20 +20,23 @@ class App extends Component {
 
   }
 
-  // onSearchChange = (event) => {
-  //   this.setState({ searchfield: event.target.value })
-  // }
+  onChange = (event) => {
+    this.setState({insertField: event.target.value});
+  }
+
+  onSubmit = (event) => {
+    alert('A name was submitted: ' + this.state.value);
+    event.preventDefault();
+  }
 
   render() {
-    const { todos } = this.state;
-    // const filteredRobots = robots.filter(robot =>{
-    //   return robot.name.toLowerCase().includes(searchfield.toLowerCase());
-    // })
-    console.log(todos);
+    const { todos, insertField } = this.state;
 
     return(
         <div className='tc'>
           <img alt = "" src={ require('../logo.png') } />
+           <InsertBox handleChange={this.onChange}/>
+           <SubmitButton handleSubmit={this.onSubmit}/>
           <CardList todos={ todos } />
         </div>
       );
@@ -41,8 +44,3 @@ class App extends Component {
 }
 
 export default App;
-
-/* <Scroll>
-  <CardList robots={filteredRobots} />
-</Scroll> */
-  // <SearchBox searchChange={this.onSearchChange}/>
