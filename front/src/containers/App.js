@@ -25,14 +25,39 @@ class App extends Component {
   }
 
   onSubmit = (event) => {
-    alert('A name was submitted: ' + this.state.value);
-    event.preventDefault();
+    !this.state.insertField.length ?
+     console.log('field cannot be empty')
+    :
+    fetch('http://127.0.0.1:5000/', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+      body: JSON.stringify({
+        task: this.state.insertField,
+      })
+    })
+  }
+  // https://codepen.io/kipp0/pen/pPNrrj
+  launch_toast = () => {
+    let x = document.getElementById("toast")
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 5000);
   }
 
   render() {
-    const { todos, insertField } = this.state;
+    const { todos } = this.state;
 
-    return(
+    return !Object.keys(todos).length ?
+    <div className = 'flex flex-column items-center'>
+    <h1>This app is waiting for an API connection</h1>
+    <h1>Please press refresh or CTRL/CMD + R after few seconds</h1>
+    <h1>Thank you.</h1>
+    </div>
+    :
+      (
         <div className='tc'>
           <img alt = "" src={ require('../logo.png') } />
            <InsertBox handleChange={this.onChange}/>

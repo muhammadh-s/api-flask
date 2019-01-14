@@ -6,14 +6,14 @@ app = Flask(__name__)
 api = Api(app)
 cors = CORS(app)
 
-TODOS = [
-    {'task': 'build an API'},
-    {'task':  'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod te'},
-    {'task': 'profit!'},
-    {'task': 'profit!'},
-    {'task': 'profit!'},
-    {'task': 'profit!'},
-]
+TODOS = {
+    1: {
+        'task': 'build an API',
+    },
+    2: {
+        'task': 'build frontend through react',
+    },
+}
 
 
 def abort_if_todo_doesnt_exist(todo_id):
@@ -31,7 +31,7 @@ class Todo(Resource):
         abort_if_todo_doesnt_exist(todo_id)
         del TODOS[todo_id]
         return '', 204
-
+# https://www.programiz.com/python-programming/nested-dictionary
     def put(self, todo_id):
         args = parser.parse_args()
         task = {'task': args['task']}
@@ -45,18 +45,18 @@ class TodoList(Resource):
     def get(self):
         return TODOS
 
-    # def post(self):
-    #     args = parser.parse_args()
-    #     todo_id = int(max(TODOS.keys()).lstrip('todo')) + 1
-    #     todo_id = 'todo%i' % todo_id
-    #     TODOS[todo_id] = {'task': args['task']}
-    #     return TODOS[todo_id], 201
+    def post(self):
+        args = parser.parse_args()
+        todo_id = int(max(TODOS.keys())) + 1
+        todo_id = int('%i' % todo_id)
+        TODOS[todo_id] = {'task': args['task']}
+        return TODOS[todo_id], 201
 
 ##
 ## Actually setup the Api resource routing here
 ##
 api.add_resource(TodoList, '/') #GET, POST
-api.add_resource(Todo, '/todos/<todo_id>') #DEL, PUT
+api.add_resource(Todo, '/<todo_id>') #DEL, PUT
 
 
 if __name__ == '__main__':

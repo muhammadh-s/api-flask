@@ -5,17 +5,18 @@ const CardList = ({ todos }) => {
   return (
     <div className = 'center'>
       {
-        todos.map((todoList, i) => {
+        Object.keys(todos).map((TodoList, i) => {
           return (
             <Card
               key = {[i]}
-              task={todos[i].task}
-              />
+              task = {todos[TodoList].task}
+            />
           );
         })
       }
     </div>
   );
 }
+
 
 export default CardList;
