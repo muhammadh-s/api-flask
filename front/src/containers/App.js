@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import CardList from '../components/CardList';
 import InsertBox from '../components/InsertBox';
 import SubmitButton from '../components/SubmitButton';
+import Notifications, {notify} from 'react-notify-toast';
 import './App.css';
+
 
 class App extends Component {
   constructor() {
@@ -17,8 +19,9 @@ class App extends Component {
     fetch('http://127.0.0.1:5000/')
       .then(response=> response.json())
       .then(todoList => {this.setState({ todos: todoList})});
-
   }
+
+
 
   onChange = (event) => {
     this.setState({insertField: event.target.value});
@@ -26,7 +29,7 @@ class App extends Component {
 
   onSubmit = (event) => {
     !this.state.insertField.length ?
-     console.log('field cannot be empty')
+    notify.show('Field cannot be left blank', "error")
     :
     fetch('http://127.0.0.1:5000/', {
       method: 'POST',
@@ -40,12 +43,7 @@ class App extends Component {
       })
     })
   }
-  // https://codepen.io/kipp0/pen/pPNrrj
-  launch_toast = () => {
-    let x = document.getElementById("toast")
-    x.className = "show";
-    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 5000);
-  }
+
 
   render() {
     const { todos } = this.state;
@@ -63,6 +61,7 @@ class App extends Component {
            <InsertBox handleChange={this.onChange}/>
            <SubmitButton handleSubmit={this.onSubmit}/>
           <CardList todos={ todos } />
+          <Notifications />
         </div>
       );
   }
