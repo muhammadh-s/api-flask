@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import CardList from '../components/CardList';
 import InsertBox from '../components/InsertBox';
 import SubmitButton from '../components/SubmitButton';
-import Notifications, {notify} from 'react-notify-toast';
 import './App.css';
+import { ToastContainer, toast, Flip } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 
 class App extends Component {
@@ -13,6 +14,7 @@ class App extends Component {
       todos: [],
       insertField: '',
     }
+
   }
 
   componentDidMount() {
@@ -21,7 +23,21 @@ class App extends Component {
       .then(todoList => {this.setState({ todos: todoList})});
   }
 
-
+  notify = (message, type) => {
+    switch (type){
+    case 'error':
+      toast.error(message);
+      break;
+    case 'success':
+      toast.success(message);
+      break;
+    case 'warning':
+      toast.warning(message);
+      break;
+    default:
+      toast(message)
+    }
+  }
 
   onChange = (event) => {
     this.setState({insertField: event.target.value});
@@ -29,7 +45,7 @@ class App extends Component {
 
   onSubmit = (event) => {
     !this.state.insertField.length ?
-    notify.show('Field cannot be left blank', "error")
+    this.notify("The text box cannot be left blank", 'warning')
     :
     fetch('http://127.0.0.1:5000/', {
       method: 'POST',
@@ -42,6 +58,7 @@ class App extends Component {
         task: this.state.insertField,
       })
     })
+
   }
 
 
@@ -51,7 +68,7 @@ class App extends Component {
     return !Object.keys(todos).length ?
     <div className = 'flex flex-column items-center'>
     <h1>This app is waiting for an API connection</h1>
-    <h1>Please press refresh or CTRL/CMD + R after few seconds</h1>
+    <h1>Please refresh the page or press CTRL/CMD + R after few seconds</h1>
     <h1>Thank you.</h1>
     </div>
     :
@@ -61,7 +78,17 @@ class App extends Component {
            <InsertBox handleChange={this.onChange}/>
            <SubmitButton handleSubmit={this.onSubmit}/>
           <CardList todos={ todos } />
-          <Notifications />
+           <ToastContainer position="top-right"
+             autoClose={5000}
+             hideProgressBar
+             newestOnTop
+             closeOnClick
+             rtl={false}
+             pauseOnVisibilityChange
+             draggable
+             pauseOnHover={false}
+             transition={Flip}
+           />
         </div>
       );
   }
