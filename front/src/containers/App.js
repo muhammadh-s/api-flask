@@ -6,7 +6,6 @@ import './App.css';
 import { ToastContainer, toast, Flip } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 
-
 class App extends Component {
   constructor() {
     super()
@@ -19,7 +18,7 @@ class App extends Component {
 
   componentDidMount() {
     fetch('http://127.0.0.1:5000/')
-      .then(response=> response.json())
+      .then(response => response.json())
       .then(todoList => {this.setState({ todos: todoList})});
   }
 
@@ -44,9 +43,21 @@ class App extends Component {
   }
 
   onSubmit = (event) => {
+    // let newTodo = [this.state.todos];
+    const newTodo = Object.assign(
+      this.state.todos, +1,
+      Object.assign(
+        {task : this.state.insertField}
+      )
+    )
+
     !this.state.insertField.length ?
     this.notify("The text box cannot be left blank", 'warning')
     :
+    // newTodo.create({task: this.state.insertField});
+
+    this.setState({ todos: newTodo});
+
     fetch('http://127.0.0.1:5000/', {
       method: 'POST',
       headers: {
