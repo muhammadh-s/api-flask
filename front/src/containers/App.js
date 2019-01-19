@@ -43,31 +43,38 @@ class App extends Component {
   }
 
   onSubmit = (event) => {
-    // let newTodo = [this.state.todos];
-    let new1 = {
+
+    const check = this.state.todos.some(
+      todo => todo.task === this.state.insertField
+    );
+
+    let newTodo = {
       'id' : this.state.todos.id + 1,
       'task' : this.state.insertField,
     }
 
-    !this.state.insertField.length ?
-    this.notify("The text box cannot be left blank", 'warning')
-    :
-    // newTodo.create({task: this.state.insertField});
-    this.state.todos.push(new1)
+    if (this.state.insertField.length === 0)
+      this.notify("The text box cannot be left blank", 'warning')
+    else if (check === true)
+      this.notify("The same note has already been added", 'error')
+    else
+      this.setState(prevState => ({
+        todos: [...prevState.todos, newTodo]
+      }))
 
-
-    fetch('http://127.0.0.1:5000/', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
-      body: JSON.stringify({
-        task: this.state.insertField,
+      fetch('http://127.0.0.1:5000/', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        },
+        body: JSON.stringify({
+          task: this.state.insertField,
+        })
       })
-    })
 
+      this.setState({insertField: ''});
   }
 
 
@@ -83,11 +90,14 @@ class App extends Component {
     :
       (
         <div className='tc'>
-          <img alt = "" src={ require('../logo.png') } />
-           <InsertBox handleChange={this.onChange}/>
-           <SubmitButton handleSubmit={this.onSubmit}/>
+          <img alt = "Logo" src={ require('../logo.png') } />
+          <InsertBox
+             handleChange={this.onChange}
+             value= {this.state.insertField}
+           />
+          <SubmitButton handleSubmit={this.onSubmit}/>
           <CardList todos={ todos } />
-           <ToastContainer position="top-right"
+          <ToastContainer position="top-right"
              autoClose={5000}
              hideProgressBar
              newestOnTop
@@ -97,7 +107,7 @@ class App extends Component {
              draggable
              pauseOnHover={false}
              transition={Flip}
-           />
+          />
         </div>
       );
   }

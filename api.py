@@ -1,4 +1,5 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, abort
+from flask import request
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -14,6 +15,23 @@ TODOS = [
         'task': 'build frontend through react',
     },
 ]
+
+
+@app.route('/', methods=['POST'])
+def create_task():
+    match = None
+    for d in TODOS:
+        if d['task'] == request.json.values():
+            match = True
+
+    if not request.json or not 'task' in request.json or '' in request.json.values() or match == True:
+        abort(400)
+    newTodo = {
+        'id': TODOS[-1]['id'] + 1,
+        'task': request.json.get('task', ""),
+    }
+    TODOS.append(newTodo)
+    return jsonify({'newTodo': newTodo}), 201
 
 
 @app.route('/', methods=['GET'])

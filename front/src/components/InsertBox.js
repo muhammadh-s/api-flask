@@ -1,15 +1,17 @@
 import React from 'react';
 
-const InsertBox = ({ insertField, handleChange }) => {
+const InsertBox = ({ value, handleChange }) => {
   return (
     <div className='pa2'>
       <input
-        className='tc mt2 pa3 ba b--gray bg-white'
+        className='tc mt2 pa3 ba  b--black bg-near-white'
         type='text'
-        placeholder='to-do'
+        placeholder='Write to-do here'
         onChange={handleChange}
         size= '35'
-    
+        value = { value }
+
+
       />
       {/* <textarea autofocus rows="4" cols="35"
       /> */}
