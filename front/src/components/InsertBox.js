@@ -4,9 +4,9 @@ const InsertBox = ({ value, handleChange }) => {
   return (
     <div className='pa2'>
       <input
-        className='tc mt2 pa3 ba  b--black bg-near-white'
+        className='tc mt2 pa3 ba b--black bg-near-white'
         type='text'
-        placeholder='Write to-do here'
+        placeholder='Write a to-do here'
         onChange={handleChange}
         size= '35'
         value = { value }

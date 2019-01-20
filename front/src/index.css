@@ -3,7 +3,7 @@ body {
   padding: 0;
   font-family: arial;
   font-weight: 600;
-  vertical-align: middle;
+  /* vertical-align: middle; */
 
   background: #667db6;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #667db6, #0082c8, #0082c8, #667db6);  /* Chrome 10-25, Safari 5.1-6 */
