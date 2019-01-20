@@ -13,13 +13,16 @@ class App extends Component {
       todos: [],
       insertField: '',
     }
+    this.handleApiErrors = this.handleApiErrors.bind(this);
 
   }
 
   componentDidMount() {
-    fetch('http://127.0.0.1:5000/')
-      .then(response => response.json())
-      .then(todoList => {this.setState({ todos: todoList.TODOS})});
+    fetch('http://127.0.0.1:5000/todos')
+    .then(this.handleApiErrors)
+    .catch(error => this.notify("Could not connect to network", 'error') )
+    .then(response => response.json())
+    .then(todoList => {this.setState({ todos: todoList.todos})});
   }
 
   notify = (message, type) => {
@@ -38,6 +41,13 @@ class App extends Component {
     }
   }
 
+  handleApiErrors = (response) => {
+    if (!response.ok) {
+        throw Error(response.statusText);
+    }
+    return response;
+  }
+
   onChange = (event) => {
     this.setState({insertField: event.target.value});
   }
@@ -52,17 +62,12 @@ class App extends Component {
       'id' : this.state.todos.id + 1,
       'task' : this.state.insertField,
     }
-
     if (this.state.insertField.length === 0)
       this.notify("The text box cannot be left blank", 'warning')
     else if (check === true)
       this.notify("The same note has already been added", 'error')
     else
-      this.setState(prevState => ({
-        todos: [...prevState.todos, newTodo]
-      }))
-
-      fetch('http://127.0.0.1:5000/', {
+      fetch('http://127.0.0.1:5000/todo', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -73,22 +78,21 @@ class App extends Component {
           task: this.state.insertField,
         })
       })
+      .then(this.handleApiErrors)
+      .then(response => this.setState(prevState => ({
+        todos: [...prevState.todos, newTodo]
+      })) )
+      .catch(error => this.notify("Could not connect to network", 'error') );
 
       this.setState({insertField: ''});
+
   }
 
 
   render() {
     const { todos } = this.state;
 
-    return !Object.keys(todos).length ?
-    <div className = 'flex flex-column items-center'>
-    <h1>This app is waiting for an API connection</h1>
-    <h1>Please refresh the page or press CTRL/CMD + R after few seconds</h1>
-    <h1>Thank you.</h1>
-    </div>
-    :
-      (
+    return (
         <div className='tc'>
           <img alt = "Logo" src={ require('../logo.png') } />
           <InsertBox
@@ -109,7 +113,7 @@ class App extends Component {
              transition={Flip}
           />
         </div>
-      );
+      )
   }
 }
 
