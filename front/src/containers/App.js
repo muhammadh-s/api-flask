@@ -63,7 +63,7 @@ class App extends Component {
       'task' : this.state.insertField,
     }
     if (this.state.insertField.length === 0)
-      this.notify("The text box cannot be left blank", 'warning')
+      this.notify("The text box cannot be left blank", 'error')
     else if (check === true)
       this.notify("The same note has already been added", 'error')
     else
@@ -112,6 +112,10 @@ class App extends Component {
              pauseOnHover={false}
              transition={Flip}
           />
+          <span id="forkongithub">
+          <a href="https://github.com/">
+          Fork This App on GitHub</a>
+          </span>
         </div>
       )
   }

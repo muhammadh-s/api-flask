@@ -3,7 +3,7 @@ import Card from './Card';
 
 const CardList = ({ todos }) => {
   return (
-    <div className = "flex items-start flex-wrap justify-center">
+    <div className = "flex items-center flex-wrap justify-center flex-wrap-reverse">
       {
         Object.keys(todos).map((TodoList, i) => {
           return (
