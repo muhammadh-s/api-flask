@@ -1,15 +1,12 @@
 import React from 'react';
 
-const Color = ({color}) => {
+const Color = ({ color }) => {
   return (
-    <div class="ph3">
-    <h1 class="f6 fw6 ttu tracked">Priority</h1>
-    <a class="f6 link dim br1 ph3 pv2 mb2 dib white bg-red" href="#0">1</a>
-    <a class="f6 link dim br1 ph3 pv2 mb2 dib white bg-yellow" href="#0">2</a>
-    <a class="f6 link dim br1 ph3 pv2 mb2 dib white bg-green" href="#0">3</a>
-    <a class="f6 link dim br1 ph3 pv2 mb2 dib white bg-hot-pink" href="#0">4</a>
-    <a class="f6 link dim br1 ph3 pv2 mb2 dib white bg-navy" href="#0">5</a>
-  </div>
+    <div onClick = {color} >
+      <button className="mb1 link dim br1 ph3 pv2 dib black bg-light-red" value='light-red'></button>
+      <button className="mb1 link dim br1 ph3 pv2 dib black bg-yellow" value='yellow' ></button>
+      <button className="mb1 link dim br1 ph3 pv2 dib black bg-green" value='green' ></button>
+    </div>
   );
 }
 

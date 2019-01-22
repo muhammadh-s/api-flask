@@ -34,6 +34,7 @@ class Todos(Resource):
         newTodo = {
                 'id': TODOS[-1]['id'] + 1,
                 'task': request.json['task'],
+                'color': request.json['color'],
                 }
         TODOS.append(newTodo)
         return newTodo, 201

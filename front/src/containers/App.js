@@ -15,6 +15,7 @@ class App extends Component {
     this.state = {
       todos: [],
       insertField: '',
+      color: 'yellow'
     }
     this.handleApiErrors = this.handleApiErrors.bind(this);
 
@@ -74,6 +75,7 @@ class App extends Component {
     let newTodo = {
       'id' : this.state.todos.id + 1,
       'task' : this.state.insertField,
+      'color' : this.state.color
     }
     if (this.state.insertField.length === 0)
       this.notify("The text box cannot be left blank", 'error')
@@ -89,6 +91,7 @@ class App extends Component {
         },
         body: JSON.stringify({
           task: this.state.insertField,
+          color: this.state.color,
         })
       })
       .then(this.handleApiErrors)
@@ -118,6 +121,9 @@ class App extends Component {
              value= {this.state.insertField}
              enter= {this.onEnterPress}
            />
+           <Color
+             color = {this.setColor}
+           />
           <SubmitButton handleSubmit={this.onSubmit}/>
           <CardList
             todos={ todos }
@@ -136,9 +142,7 @@ class App extends Component {
           <ForkGithub
             link = { 'https://github.com' }
           />
-          <Color
-            color = {this.setColor}
-          />
+
         </div>
       )
   }
