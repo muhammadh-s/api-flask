@@ -3,8 +3,8 @@ import CardList from '../components/CardList';
 import InsertBox from '../components/InsertBox';
 import SubmitButton from '../components/SubmitButton';
 import ForkGithub from '../components/ForkGithub';
+import Color from '../components/Color';
 import Logo from '../logo.png';
-import Priority from '../components/Priority';
 import './App.css';
 import { ToastContainer, toast, Flip } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
@@ -15,7 +15,6 @@ class App extends Component {
     this.state = {
       todos: [],
       insertField: '',
-      priorityField: 1,
     }
     this.handleApiErrors = this.handleApiErrors.bind(this);
 
@@ -81,7 +80,7 @@ class App extends Component {
     else if (check === true)
       this.notify("The same note has already been added", 'error')
     else
-      fetch('http://127.0.0.1:5000/todo', {
+      fetch('http://127.0.0.1:5000/todos', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -100,13 +99,10 @@ class App extends Component {
 
       this.setState({insertField: ''});
   }
-  inc = (event) => {
-    this.setState({ priorityField: this.state.priorityField + 1 })
-  }
-  dec = (event) => {
-    this.setState({ priorityField: this.state.priorityField - 1 })
-  }
 
+  setColor = (event) => {
+    this.setState({color: event.target.value})
+  }
 
   render() {
     const { todos } = this.state;
@@ -122,14 +118,10 @@ class App extends Component {
              value= {this.state.insertField}
              enter= {this.onEnterPress}
            />
-           <Priority
-             prChange= {this.onPrChange}
-             value= {this.state.priorityField}
-             inc= {this.inc}
-             dec= {this.dec}
-           />
           <SubmitButton handleSubmit={this.onSubmit}/>
-          <CardList todos={ todos } />
+          <CardList
+            todos={ todos }
+          />
           <ToastContainer position="top-right"
              autoClose={5000}
              hideProgressBar
@@ -144,7 +136,9 @@ class App extends Component {
           <ForkGithub
             link = { 'https://github.com' }
           />
-              
+          <Color
+            color = {this.setColor}
+          />
         </div>
       )
   }

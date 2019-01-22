@@ -8,6 +8,7 @@ const CardList = ({ todos }) => {
         Object.keys(todos).map((TodoList, i) => {
           return (
             <Card
+              color = { todos[TodoList].color }
               key = {[i]}
               task = {todos[TodoList].task}
             />
