@@ -10,7 +10,7 @@ const InsertBox = ({ value, handleChange, enter }) => {
         onChange={ handleChange }
         rows="1"
         cols="35"
-        maxlength="291"
+        maxLength="291"
         value = { value }
         onKeyDown = { enter }
       />

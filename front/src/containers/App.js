@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import CardList from '../components/CardList';
 import InsertBox from '../components/InsertBox';
 import SubmitButton from '../components/SubmitButton';
+import ForkGithub from '../components/ForkGithub';
+import Logo from '../logo.png';
+import Priority from '../components/Priority';
 import './App.css';
 import { ToastContainer, toast, Flip } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
@@ -12,6 +15,7 @@ class App extends Component {
     this.state = {
       todos: [],
       insertField: '',
+      priorityField: 1,
     }
     this.handleApiErrors = this.handleApiErrors.bind(this);
 
@@ -51,6 +55,10 @@ class App extends Component {
   onChange = (event) => {
     this.setState({insertField: event.target.value});
   }
+  onPrChange = (event) => {
+    this.setState({priorityField: event.target.value});
+    }
+
 
   onEnterPress = (event) => {
   if(event.keyCode === 13 && event.shiftKey === false) {
@@ -60,7 +68,6 @@ class App extends Component {
 }
 
   onSubmit = (event) => {
-
     const check = this.state.todos.some(
       todo => todo.task === this.state.insertField
     );
@@ -92,7 +99,12 @@ class App extends Component {
       .catch(error => this.notify("Could not connect to network", 'error') );
 
       this.setState({insertField: ''});
-
+  }
+  inc = (event) => {
+    this.setState({ priorityField: this.state.priorityField + 1 })
+  }
+  dec = (event) => {
+    this.setState({ priorityField: this.state.priorityField - 1 })
   }
 
 
@@ -101,11 +113,20 @@ class App extends Component {
 
     return (
         <div className='tc'>
-          <img alt = "Logo" src={ require('../logo.png') } />
+          <img
+            src= { Logo }
+            alt = "Logo"
+          />
           <InsertBox
              handleChange= {this.onChange}
              value= {this.state.insertField}
              enter= {this.onEnterPress}
+           />
+           <Priority
+             prChange= {this.onPrChange}
+             value= {this.state.priorityField}
+             inc= {this.inc}
+             dec= {this.dec}
            />
           <SubmitButton handleSubmit={this.onSubmit}/>
           <CardList todos={ todos } />
@@ -120,10 +141,10 @@ class App extends Component {
              pauseOnHover={false}
              transition={Flip}
           />
-          <span id="forkongithub">
-          <a href="https://github.com/">
-          Fork This App on GitHub</a>
-          </span>
+          <ForkGithub
+            link = { 'https://github.com' }
+          />
+              
         </div>
       )
   }
