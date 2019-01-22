@@ -52,6 +52,13 @@ class App extends Component {
     this.setState({insertField: event.target.value});
   }
 
+  onEnterPress = (event) => {
+  if(event.keyCode === 13 && event.shiftKey === false) {
+    event.preventDefault();
+    this.onSubmit();
+  }
+}
+
   onSubmit = (event) => {
 
     const check = this.state.todos.some(
@@ -96,8 +103,9 @@ class App extends Component {
         <div className='tc'>
           <img alt = "Logo" src={ require('../logo.png') } />
           <InsertBox
-             handleChange={this.onChange}
+             handleChange= {this.onChange}
              value= {this.state.insertField}
+             enter= {this.onEnterPress}
            />
           <SubmitButton handleSubmit={this.onSubmit}/>
           <CardList todos={ todos } />
