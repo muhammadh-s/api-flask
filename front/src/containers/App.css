@@ -5,6 +5,22 @@ img {
   width: 125px;
 }
 
+.icon{
+  height: 26px;
+  width: 26px;
+  margin-top: -25px;
+  padding-left: 105%;
+  display: none;
+}
+ .card:hover .icon {
+    display: block;
+    cursor: pointer;
+}
+.color:hover {
+   cursor: pointer;
+}
+
+
 #forkongithub a {
     background: #000000;
     color: #fff;

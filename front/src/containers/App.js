@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
+import { ToastContainer, toast, Flip } from 'react-toastify';
 import CardList from '../components/CardList';
 import InsertBox from '../components/InsertBox';
 import SubmitButton from '../components/SubmitButton';
 import ForkGithub from '../components/ForkGithub';
 import Color from '../components/Color';
 import Logo from '../logo.png';
-import './App.css';
-import { ToastContainer, toast, Flip } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
+import './App.css';
 
 class App extends Component {
   constructor() {
@@ -18,7 +18,6 @@ class App extends Component {
       color: 'yellow'
     }
     this.handleApiErrors = this.handleApiErrors.bind(this);
-
   }
 
   componentDidMount() {
@@ -55,10 +54,6 @@ class App extends Component {
   onChange = (event) => {
     this.setState({insertField: event.target.value});
   }
-  onPrChange = (event) => {
-    this.setState({priorityField: event.target.value});
-    }
-
 
   onEnterPress = (event) => {
   if(event.keyCode === 13 && event.shiftKey === false) {
@@ -72,8 +67,15 @@ class App extends Component {
       todo => todo.task === this.state.insertField
     );
 
+    let idN = Math.max.apply(Math, this.state.todos.map(
+      function(o) {
+        return o.id;
+      }
+    ))
+    if (idN === -Infinity){idN = 0}
+
     let newTodo = {
-      'id' : this.state.todos.id + 1,
+      'id' : idN + 1,
       'task' : this.state.insertField,
       'color' : this.state.color
     }
@@ -107,6 +109,25 @@ class App extends Component {
     this.setState({color: event.target.value})
   }
 
+  onDelete = (event) => {
+    let idN = +event.target.id
+    let todos = this.state.todos.filter(
+      todo => todo.id !== idN
+    )
+    fetch('http://127.0.0.1:5000/todos', {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+      body: JSON.stringify({
+        id: idN,
+      })
+    })
+    this.setState({todos: todos})
+  }
+
   render() {
     const { todos } = this.state;
 
@@ -121,12 +142,11 @@ class App extends Component {
              value= {this.state.insertField}
              enter= {this.onEnterPress}
            />
-           <Color
-             color = {this.setColor}
-           />
+           <Color color = {this.setColor}/>
           <SubmitButton handleSubmit={this.onSubmit}/>
           <CardList
             todos={ todos }
+            del = { this.onDelete }
           />
           <ToastContainer position="top-right"
              autoClose={5000}
@@ -139,10 +159,7 @@ class App extends Component {
              pauseOnHover={false}
              transition={Flip}
           />
-          <ForkGithub
-            link = { 'https://github.com' }
-          />
-
+          <ForkGithub link = { 'https://github.com' }/>
         </div>
       )
   }
