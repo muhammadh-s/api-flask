@@ -1,7 +1,4 @@
 flask
 flask_restful
 flask_cors
-<<<<<<< HEAD
 gunicorn
-=======
->>>>>>> c5c3a36bccaf4ec2c519a59d696b3885215889b3
