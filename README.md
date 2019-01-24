@@ -1,39 +1,44 @@
 # todo-api
-> A RESTful API for task management. 
+> A RESTful API for task management.
 
-WARNING: Data in the API for tasks resides in memory not database, hence the newly saved tasks gets removed when the Heroku Dyno sleeps.
-Feel free to use endpoints for practice/experimentation.
+Built with:
+  * flask
+  * flask_restful
+  * flask_cors
 
-## Try now
+## Setup
 
-GET:
+1. `git clone git@github.com:muhammadh-s/todo-api.git`
+2. `cd todo-api`
+3. `pip install -r requirements.txt` _or place virtual environment and then install_
+4. `python api.py`
+
+or visit `https://todo-flask-restful-api.herokuapp.com`
+WARNING: Data in the API for tasks resides in memory not database, hence the newly saved tasks gets removed when the Heroku Dyno sleeps. Feel free to use endpoints for practice/experimentation.
+
+### Endpoint:
+
+* GET `/todos`
+```JSON
+  "todos": [
+         {
+           "id": 1,
+           "task": "Lorem ipsum dolor sit amet,\n    consectetur adipisicing elit,\n    sed do eiusmod tempor incididunt\n    ut labore et dolore magna aliqua.\n    Ut enim ad minim veniam, quis nostrud\n    exercitation ulla",
+           "color": "yellow"
+         },
+       ]
 ```
-https://rest-api-flask-mhs.herokuapp.com/notes
-```
 
-## Description
-
-This API have POST and GET methods to emulate a note taking app.
-
-The POST method adds a "title" and "details" to the database and GET method
-retrieve a list of notes.
-
-To use POST on your local environment:
-```
-http://127.0.0.1:5000/note/replace-yours
-```
-To use GET:
-```
-http://127.0.0.1:5000/notes
-```
-
-Note: Use POST method with an application like POSTMAN, in order to add body
-(JSON) in the request.
-```
+* POST `/todos`
+  ```JSON
 {
-  "details": "replace-yours"
+  "task": "<fill in the task>",
+  "color": "<fill in the color>"
 }
-```
-## Implementation
+  ```
+_Note: color is an additional field to mark grouping/priority of tasks_   
 
-This API is built using Flask, FlaskRESTful, SQLAlchemy, hence uses Python-3.7.1
+* DELETE `/todos`
+  ```
+  'id': '<fill in the id>'
+  ```
