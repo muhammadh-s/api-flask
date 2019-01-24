@@ -40,7 +40,7 @@ WARNING: Data in the API for tasks resides in memory not database, hence the new
 
 * POST : `/todos`
 
-Body:
+  Body:
 ```JSON
   {
     "task": "<fill in the task>",
@@ -49,7 +49,7 @@ Body:
   ```
 _Note: color is an additional field to mark grouping/priority of tasks_   
 
-Response: (newly created task returned)
+  Response: (newly created task returned)
 ```JSON
 201 CREATED
   {
@@ -60,13 +60,13 @@ Response: (newly created task returned)
 ```
 * DELETE : `/todos`
 
-Body:
+  Body:
 ```JSON
   {
     "id": "<fill in the id>"
   }
 ```
-Response:
+  Response:
 ```JSON
 200 OK
   {
