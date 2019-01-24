@@ -19,32 +19,36 @@ text = list('''Lorem ipsum dolor sit amet,
     occaecat cupidatat non proident, sunt in culpa qui
     officia deserunt mollit anim id est laborum.''')
 
+task1 = ''.join(text[0:200])
+task2 = ''.join(text[100:400])
+task3 = ''.join(text[20:400])
+task4 = ''.join(text[200:400])
+
 TODOS = [
     {
         'id' : 1,
-        'task': text[0:200],
+        'task': task1,
         'color': 'yellow'
     },
     {
         'id': 2,
-        'task': text[100:400],
+        'task': task2,
         'color': 'light-red'
     },
     {
         'id': 3,
-        'task': text[20:400],
+        'task': task3,
         'color': 'yellow'
     },
     {
         'id': 4,
-        'task': text[200:400],
+        'task': task4,
         'color': 'green'
     },
 
 ]
 
 class Todos(Resource):
-
     def get(self):
         return {'todos' : TODOS}, 200
     def post(self):
