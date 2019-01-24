@@ -21,7 +21,7 @@ _WARNING: Data in the API for tasks resides in memory not database, hence the ne
 
 * GET : `/todos`
 
-  Response:
+Response:
 ```JSON
 200 OK
   "todos": [
@@ -41,7 +41,7 @@ _Note: color is an additional field to mark grouping/priority of tasks_
 
 * POST : `/todos`
 
-  Body:
+Body:
 ```JSON
   {
     "task": "<fill in the task>",
@@ -49,7 +49,7 @@ _Note: color is an additional field to mark grouping/priority of tasks_
   }
   ```  
 
-  Response: (newly created task returned)
+Response: (newly created task returned)
 ```JSON
 201 CREATED
   {
@@ -60,14 +60,14 @@ _Note: color is an additional field to mark grouping/priority of tasks_
 ```
 * DELETE : `/todos`
 
-  Body:
+Body:
 ```JSON
   {
     "id": "<fill in the id>"
   }
 ```
 
-  Response:
+Response:
 ```JSON
 200 OK
   {
