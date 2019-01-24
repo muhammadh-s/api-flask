@@ -14,31 +14,59 @@ Built with:
 4. `python api.py`
 
 or visit `https://todo-flask-restful-api.herokuapp.com`
+
 WARNING: Data in the API for tasks resides in memory not database, hence the newly saved tasks gets removed when the Heroku Dyno sleeps. Feel free to use endpoints for practice/experimentation.
 
 ### Endpoint:
 
-* GET `/todos`
+* GET : `/todos`
+
+  Response:
 ```JSON
   "todos": [
          {
            "id": 1,
-           "task": "Lorem ipsum dolor sit amet,\n    consectetur adipisicing elit,\n    sed do eiusmod tempor incididunt\n    ut labore et dolore magna aliqua.\n    Ut enim ad minim veniam, quis nostrud\n    exercitation ulla",
+           "task": "Lorem ipsum dolor sit amet,\n    
+           consectetur adipisicing elit,\n    
+           sed do eiusmod tempor incididunt\n    
+           ut labore et dolore magna aliqua.\n   
+            Ut enim ad minim veniam, quis nostrud\n    
+            exercitation ulla",
            "color": "yellow"
          },
        ]
 ```
 
-* POST `/todos`
-  ```JSON
-{
-  "task": "<fill in the task>",
-  "color": "<fill in the color>"
-}
+* POST : `/todos`
+
+  Body:
+```JSON
+  {
+    "task": "<fill in the task>",
+    "color": "<fill in the color>"
+  }
   ```
 _Note: color is an additional field to mark grouping/priority of tasks_   
 
-* DELETE `/todos`
-  ```
-  'id': '<fill in the id>'
-  ```
+  Response: (newly created task returned)
+```JSON
+  {
+    "id": "<id:int>",
+    "task": "<newTask>",
+    "color": "<newColor>"
+  }
+```
+* DELETE : `/todos`
+
+  Body:
+```JSON
+  {
+    "id": "<fill in the id>"
+  }
+```
+  Response:
+```JSON
+  {
+    "message": "todo deleted"
+  }
+```
