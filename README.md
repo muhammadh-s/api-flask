@@ -15,7 +15,7 @@ Built with (but not limited to) :
 
 or visit : <https://todo-flask-restful-api.herokuapp.com>
 
-_WARNING: Data in the API for tasks resides in memory not database, hence the newly saved tasks gets removed when the Heroku Dyno sleeps. Feel free to use endpoints for practice or experimentation._
+_WARNING: Data for tasks resides in memory not database, hence the newly saved tasks gets removed when the Heroku Dyno sleeps. Feel free to use endpoints for practice or experimentation._
 
 ### Endpoint:
 
