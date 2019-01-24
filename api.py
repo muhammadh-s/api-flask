@@ -70,6 +70,5 @@ class Todos(Resource):
 
 api.add_resource(Todos, '/todos')
 
-
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()

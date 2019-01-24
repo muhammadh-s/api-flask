@@ -1,5 +1,8 @@
 # todo-api
-> An API to create and delete tasks.
+> A RESTful API for task management. 
+
+WARNING: Data in the API for tasks resides in memory not database, hence the newly saved tasks gets removed when the Heroku Dyno sleeps.
+Feel free to use endpoints for practice/experimentation.
 
 ## Try now
 
