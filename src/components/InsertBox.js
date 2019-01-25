@@ -9,7 +9,7 @@ const InsertBox = ({ value, handleChange, enter }) => {
         placeholder='Write a to-do here'
         onChange={ handleChange }
         rows="1"
-        cols="35"
+        cols="45"
         maxLength="291"
         value = { value }
         onKeyDown = { enter }

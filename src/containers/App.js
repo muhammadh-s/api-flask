@@ -9,6 +9,8 @@ import Logo from '../logo.png';
 import 'react-toastify/dist/ReactToastify.min.css';
 import './App.css';
 
+const API = ('https://todo-flask-restful-api.herokuapp.com/todos');
+
 class App extends Component {
   constructor() {
     super()
@@ -21,9 +23,12 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch('http://127.0.0.1:5000/todos')
+    fetch(API)
     .then(this.handleApiErrors)
-    .catch(error => this.notify("Could not connect to network", 'error') )
+    .catch(error => this.notify(
+      "Could not connect to network",
+      'error')
+    )
     .then(response => response.json())
     .then(todoList => {this.setState({ todos: todoList.todos})});
   }
@@ -67,7 +72,8 @@ class App extends Component {
       todo => todo.task === this.state.insertField
     );
 
-    let idN = Math.max.apply(Math, this.state.todos.map(
+    let idN = Math.max.apply(Math,
+      this.state.todos.map(
       function(o) {
         return o.id;
       }
@@ -80,11 +86,17 @@ class App extends Component {
       'color' : this.state.color
     }
     if (this.state.insertField.length === 0)
-      this.notify("The text box cannot be left blank", 'error')
+      this.notify(
+        "The text box cannot be left blank",
+        'error'
+      )
     else if (check === true)
-      this.notify("The same note has already been added", 'error')
+      this.notify(
+        "The same note has already been added",
+        'error'
+      )
     else
-      fetch('http://127.0.0.1:5000/todos', {
+      fetch(API, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -100,7 +112,10 @@ class App extends Component {
       .then(response => this.setState(prevState => ({
         todos: [...prevState.todos, newTodo]
       })) )
-      .catch(error => this.notify("Could not connect to network", 'error') );
+      .catch(error => this.notify(
+        "Could not connect to network",
+        'error')
+      );
 
       this.setState({insertField: ''});
   }
@@ -114,7 +129,7 @@ class App extends Component {
     let todos = this.state.todos.filter(
       todo => todo.id !== idN
     )
-    fetch('http://127.0.0.1:5000/todos', {
+    fetch(API, {
       method: 'DELETE',
       headers: {
         'Accept': 'application/json',
@@ -148,7 +163,8 @@ class App extends Component {
             todos={ todos }
             del = { this.onDelete }
           />
-          <ToastContainer position="top-right"
+          <ToastContainer
+            position="top-right"
              autoClose={5000}
              hideProgressBar
              newestOnTop
@@ -159,7 +175,9 @@ class App extends Component {
              pauseOnHover={false}
              transition={Flip}
           />
-          <ForkGithub link = { 'https://github.com' }/>
+          <ForkGithub link = {
+            'https://github.com/muhammadh-s/todo-app'
+          }/>
         </div>
       )
   }
