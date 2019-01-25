@@ -38,11 +38,6 @@ TODOS = [
     {
         'id': 3,
         'task': task3,
-        'color': 'yellow'
-    },
-    {
-        'id': 4,
-        'task': task4,
         'color': 'green'
     },
 
