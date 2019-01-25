@@ -9,6 +9,7 @@ Built with (but not limited to):
 
 ## Setup
 
-1.
-3.
-4.
+1. `git clone git@github.com:muhammadh-s/todo-app.git`
+2. `cd todo-api`
+3. `yarn install`
+4. `yarn start`
