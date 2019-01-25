@@ -1,6 +1,6 @@
 img {
-  height: 125px;
-  width: 125px;
+  height: 135px;
+  width: 135px;
 }
 
 .icon{
@@ -18,7 +18,6 @@ img {
    cursor: pointer;
 }
 
-
 #forkongithub a {
     background: #000000;
     color: #fff;
@@ -35,7 +34,7 @@ img {
 
 #forkongithub a:hover {
     background: #000000;
-    color: #1E90FF;
+    color: #EE82EE;
 }
 
 #forkongithub a::before,
