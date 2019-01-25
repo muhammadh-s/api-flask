@@ -20,9 +20,8 @@ text = list('''Lorem ipsum dolor sit amet,
     officia deserunt mollit anim id est laborum.''')
 
 task1 = ''.join(text[0:200])
-task2 = ''.join(text[100:400])
-task3 = ''.join(text[20:400])
-task4 = ''.join(text[200:400])
+task2 = ''.join(text[200:400])
+task3 = ''.join(text[0:400])
 
 TODOS = [
     {
