@@ -19,27 +19,12 @@ text = list('''Lorem ipsum dolor sit amet,
     occaecat cupidatat non proident, sunt in culpa qui
     officia deserunt mollit anim id est laborum.''')
 
-task1 = ''.join(text[0:200])
-task2 = ''.join(text[200:400])
-task3 = ''.join(text[0:400])
-
 TODOS = [
     {
         'id' : 1,
-        'task': task1,
+        'task': ''.join(text[0:290]),
         'color': 'yellow'
     },
-    {
-        'id': 2,
-        'task': task2,
-        'color': 'light-red'
-    },
-    {
-        'id': 3,
-        'task': task3,
-        'color': 'green'
-    },
-
 ]
 
 class Todos(Resource):
