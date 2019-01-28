@@ -169,7 +169,7 @@ class App extends Component {
             del = { this.onDelete }
           />
           <ToastContainer
-            position="top-right"
+            position="bottom-right"
              autoClose={5000}
              hideProgressBar
              newestOnTop
