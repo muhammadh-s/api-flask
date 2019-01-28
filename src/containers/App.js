@@ -6,6 +6,7 @@ import SubmitButton from '../components/SubmitButton';
 import ForkGithub from '../components/ForkGithub';
 import Color from '../components/Color';
 import Logo from '../logo.png';
+import Spinner from '../components/Spinner';
 import 'react-toastify/dist/ReactToastify.min.css';
 import './App.css';
 
@@ -17,19 +18,20 @@ class App extends Component {
     this.state = {
       todos: [],
       insertField: '',
-      color: 'yellow'
+      color: 'yellow',
+      fetchInProgress: false,
     }
     this.handleApiErrors = this.handleApiErrors.bind(this);
   }
 
   componentDidMount() {
     fetch(API)
+    .then(this.setState({fetchInProgress: true}))
     .then(this.handleApiErrors)
     .catch(error => this.notify(
-      "Could not connect to network",
-      'error')
-    )
+      "Could not connect to network",'error'))
     .then(response => response.json())
+    .then(this.setState({fetchInProgress: false}))
     .then(todoList => {this.setState({ todos: todoList.todos})});
   }
 
@@ -147,6 +149,9 @@ class App extends Component {
     const { todos } = this.state;
 
     return (
+      this.state.fetchInProgress ?
+      <Spinner/>
+      :
         <div className='tc'>
           <img
             src= { Logo }
