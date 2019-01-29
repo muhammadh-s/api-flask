@@ -1,23 +1,23 @@
 openapi: "3.0.2"
 
 info:
-  title: "Notes REST API"
-  description: "Save notes with the title and details. Then, also, retrieve a list of saved notes."
+  title: "todo-api"
+  description: "A RESTful API for task management."
   version: "1.0"
   contact:
-    name: "Github"
-    url: "https://github.com/muhammadh-s/rest-api-flask"
+    name: "GitHub"
+    url: "https://github.com/muhammadh-s/todo-api"
 
 
 servers:
-- url: "https://rest-api-flask-mhs.herokuapp.com/"
+- url: "https://todo-flask-restful-api.herokuapp.com/"
 
 paths:
-  /notes:
+  /todos:
     get:
       tags:
-      - Notes
-      summary: "Call list of notes"
+      - todos
+      summary: "Calls a list of todos"
       description: ""
       operationId: note
 
