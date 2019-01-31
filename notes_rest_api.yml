@@ -25,10 +25,16 @@ paths:
         200:
           description: Successful response
 
+    post:
+      tags:
+      - todos
+      summary: "Create a new todo"
+      description: ""
+      operationId: note
+
+      responses:
+        200:
+          description: Successful response
 
 security:
 - app_id: []
-
-tags:
-  - name: Notes
-    description: ""
