@@ -6,6 +6,9 @@ Built with (but not limited to) :
   * [flask_restful](https://github.com/flask-restful/flask-restful)
   * [flask_cors](https://github.com/corydolphin/flask-cors)
 
+Documentation: <https://todo-api-doc.netlify.com/>
+
+
 ## Setup
 
 1. `git clone git@github.com:muhammadh-s/todo-api.git`
