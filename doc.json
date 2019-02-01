@@ -4,6 +4,11 @@
 		"title": "todo-api",
 		"description": "A RESTful API for task management.",
 		"version": "1.0",
+		"x-logo": {
+			"url": "https://github.com/muhammadh-s/todo-app/raw/master/src/logo.png",
+			"backgroundColor": "#FFFFFF",
+			"altText": "todo app logo"
+		},
 		"contact": {
 			"name": "GitHub",
 			"url": "https://github.com/muhammadh-s/todo-api"
