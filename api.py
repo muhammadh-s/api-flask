@@ -32,11 +32,11 @@ class Todos(Resource):
         return {'todos' : TODOS}, 200
     def post(self):
         if not request.json:
-            return {'message': "Content-Type must be -> application/json"}, 400
+            return {'message': "Content-Type must be -> application/json"}, 415
         if not 'task' in request.json:
             return {'message': "The correct format is {'task': 'your todo here'}"}, 400
         if next(filter(lambda x: x['task'] == request.json['task'], TODOS), None) is not None:
-            return {'message': "The same todo already exists."}, 400
+            return {'message': "The same todo already exists."}, 409
         id = int(max([d['id'] for d in TODOS], default=0)) + 1
         newTodo = {
                 'id': id,
