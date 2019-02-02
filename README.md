@@ -77,3 +77,6 @@ Response:
     "message": "todo deleted"
   }
 ```
+
+## License
+MIT
