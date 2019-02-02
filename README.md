@@ -5,6 +5,7 @@ Built with (but not limited to) :
   * [flask](https://github.com/pallets/flask)
   * [flask_restful](https://github.com/flask-restful/flask-restful)
   * [flask_cors](https://github.com/corydolphin/flask-cors)
+  * [ReDoc](https://github.com/Rebilly/ReDoc)
 
 Documentation: <https://todo-api-doc.netlify.com/>
 
