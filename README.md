@@ -13,3 +13,6 @@ Built with (but not limited to):
 2. `cd todo-api`
 3. `yarn install`
 4. `yarn start`
+
+## License
+MIT
