@@ -1,13 +1,12 @@
 # To-Do
 > A web app for task management
 
-<br>
 
 ![](screenshot.png?raw=true)
 
  #### Demo : https://todo-react-app-v1.netlify.com/
 
-Built with (but not limited to):
+#### Built with (but not limited to):
 - [Create React App](https://github.com/facebook/create-react-app)
 - [react-toastify](https://github.com/fkhadra/react-toastify)
 - [tachyons](https://github.com/tachyons-css/tachyons/)
