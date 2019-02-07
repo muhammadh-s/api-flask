@@ -1,8 +1,6 @@
 # todo-api
 > A RESTful API for task management.
 
-![](screenshot.PNG?raw=true)
-
 Built with (but not limited to) :
   * [flask](https://github.com/pallets/flask)
   * [flask_restful](https://github.com/flask-restful/flask-restful)
