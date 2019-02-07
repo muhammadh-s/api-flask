@@ -9,7 +9,7 @@
 - [Create React App](https://github.com/facebook/create-react-app)
 - [react-toastify](https://github.com/fkhadra/react-toastify)
 - [tachyons](https://github.com/tachyons-css/tachyons/)
-- [todo-api](https://github.com/muhammadh-s/todo-api)
+- [todo-api](https://github.com/muhammadh-s/todo-app/tree/master/api)
 
 ## Setup
 
