@@ -1,7 +1,6 @@
 # To-Do
 > A web app for task management
 
-
 ![](screenshot.png?raw=true)
 
  #### Demo : https://todo-react-app-v1.netlify.com/
