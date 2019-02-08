@@ -9,12 +9,12 @@
 - [Create React App](https://github.com/facebook/create-react-app)
 - [react-toastify](https://github.com/fkhadra/react-toastify)
 - [tachyons](https://github.com/tachyons-css/tachyons/)
-- [todo-api](https://github.com/muhammadh-s/todo-app/tree/master/api)
+- [todo-api](/backend)
 
 ## Setup
 
 1. `git clone git@github.com:muhammadh-s/todo-app.git`
-2. `cd todo-api`
+2. `cd todo-app/frontend`
 3. `yarn install`
 4. `yarn start`
 
