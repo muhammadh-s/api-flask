@@ -21,8 +21,7 @@
 4. `yarn start`
 
 
-## Changelog
-Refer to the following file : [Changelog](/CHANGELOG.md)
+#### For changelog, please refer to the following file : [Changelog](/CHANGELOG.md)
 
 ## License
 MIT
