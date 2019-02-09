@@ -2,4 +2,4 @@ flask
 flask_restful
 flask_cors
 gunicorn
-flask_socketio
+flask-socketio
