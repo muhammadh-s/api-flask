@@ -1,6 +1,4 @@
 flask
-flask_restful
-flask_cors
 gunicorn
 flask-socketio
 eventlet
