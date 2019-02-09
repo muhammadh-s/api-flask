@@ -9,8 +9,9 @@ import Logo from '../logo.png';
 import Spinner from '../components/Spinner';
 import 'react-toastify/dist/ReactToastify.min.css';
 import './App.css';
+import io from 'socket.io-client';
 
-const API = ('https://todo-flask-restful-api.herokuapp.com/todos');
+const socket = io('http://localhost:5000');
 
 class App extends Component {
   constructor() {
@@ -21,128 +22,70 @@ class App extends Component {
       color: 'yellow',
       fetchInProgress: false,
     }
-    this.handleApiErrors = this.handleApiErrors.bind(this);
+
   }
 
   componentDidMount() {
-    fetch(API)
-    .then(this.setState({fetchInProgress: true}))
-    .then(this.handleApiErrors)
-    .catch(error => this.notify(
-      "Could not connect to network",'error'))
-    .then(response => response.json())
-    .then(this.setState({fetchInProgress: false}))
-    .then(todoList => {this.setState({ todos: todoList.todos})});
+    this.setState({ fetchInProgress: true })
+    socket.on('initial', (data) => {
+      this.setState({ todos: data })
+    });
+    this.setState({ fetchInProgress: false })
+    socket.on('message', (data) => {
+      this.setState({ todos: data })
+    });
   }
 
   notify = (message, type) => {
-    switch (type){
-    case 'error':
-      toast.error(message);
-      break;
-    case 'success':
-      toast.success(message);
-      break;
-    case 'warning':
-      toast.warning(message);
-      break;
-    default:
-      toast(message)
+    switch (type) {
+      case 'error':
+        toast.error(message);
+        break;
+      case 'success':
+        toast.success(message);
+        break;
+      case 'warning':
+        toast.warning(message);
+        break;
+      default:
+        toast(message)
     }
-  }
-
-  handleApiErrors = (response) => {
-    if (!response.ok) {
-        throw Error(response.statusText);
-    }
-    return response;
   }
 
   onChange = (event) => {
-    this.setState({insertField: event.target.value});
+    this.setState({ insertField: event.target.value });
   }
 
   onEnterPress = (event) => {
-  if(event.keyCode === 13 && event.shiftKey === false) {
-    event.preventDefault();
-    this.onSubmit();
-  }
-}
-
-  onSubmit = (event) => {
-    const check = this.state.todos.some(
-      todo => todo.task === this.state.insertField
-    );
-
-    let idN = Math.max.apply(Math,
-      this.state.todos.map(
-      function(o) {
-        return o.id;
-      }
-    ))
-    if (idN === -Infinity){idN = 0}
-
-    let newTodo = {
-      'id' : idN + 1,
-      'task' : this.state.insertField,
-      'color' : this.state.color
+    if (event.keyCode === 13 && event.shiftKey === false) {
+      event.preventDefault();
+      this.onSubmit();
     }
-    if (this.state.insertField.length === 0)
+  }
+
+  onSubmit = () => {
+    const { insertField, color } = this.state;
+    if (insertField.length === 0)
       this.notify(
         "The text box cannot be left blank",
         'error'
       )
-    else if (check === true)
-      this.notify(
-        "The same note has already been added",
-        'error'
-      )
     else
-      fetch(API, {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-        },
-        body: JSON.stringify({
-          task: this.state.insertField,
-          color: this.state.color,
-        })
-      })
-      .then(this.handleApiErrors)
-      .then(response => this.setState(prevState => ({
-        todos: [...prevState.todos, newTodo]
-      })) )
-      .catch(error => this.notify(
-        "Could not connect to network",
-        'error')
-      );
+    socket.send(insertField, color);
 
-      this.setState({insertField: ''});
+    this.setState({ insertField: '' });
   }
 
   setColor = (event) => {
-    this.setState({color: event.target.value})
+    this.setState({ color: event.target.value })
   }
 
   onDelete = (event) => {
-    let idN = +event.target.id
-    let todos = this.state.todos.filter(
-      todo => todo.id !== idN
-    )
-    fetch(API, {
-      method: 'DELETE',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
-      body: JSON.stringify({
-        id: idN,
-      })
-    })
-    this.setState({todos: todos})
+    let id = +event.target.id
+    socket.emit('delete', id);
+    socket.on('delete', (data) => {
+      this.setState({ todos: data })
+    });
   }
 
   render() {
@@ -150,41 +93,41 @@ class App extends Component {
 
     return (
       this.state.fetchInProgress ?
-      <Spinner/>
-      :
+        <Spinner />
+        :
         <div className='tc'>
           <img
-            src= { Logo }
-            alt = "Logo"
+            src={Logo}
+            alt="Logo"
           />
           <InsertBox
-             handleChange= {this.onChange}
-             value= {this.state.insertField}
-             enter= {this.onEnterPress}
-           />
-           <Color color = {this.setColor}/>
-          <SubmitButton handleSubmit={this.onSubmit}/>
+            handleChange={this.onChange}
+            value={this.state.insertField}
+            enter={this.onEnterPress}
+          />
+          <Color color={this.setColor} />
+          <SubmitButton handleSubmit={this.onSubmit} />
           <CardList
-            todos={ todos }
-            del = { this.onDelete }
+            todos={todos}
+            del={this.onDelete}
           />
           <ToastContainer
             position="bottom-right"
-             autoClose={5000}
-             hideProgressBar
-             newestOnTop
-             closeOnClick
-             rtl={false}
-             pauseOnVisibilityChange
-             draggable
-             pauseOnHover={false}
-             transition={Flip}
+            autoClose={5000}
+            hideProgressBar
+            newestOnTop
+            closeOnClick
+            rtl={false}
+            pauseOnVisibilityChange
+            draggable
+            pauseOnHover={false}
+            transition={Flip}
           />
-          <ForkGithub link = {
+          <ForkGithub link={
             'https://github.com/muhammadh-s/todo-app'
-          }/>
+          } />
         </div>
-      )
+    )
   }
 }
 
