@@ -6,17 +6,17 @@
 - flask-socketIO
 
 ### Changed
-- Rewrote functions due to latest additions.
+- Methods due to latest additions.
 
 ### Removed
-- Removed un-necessary functions.
+- Un-necessary methods.
   
 ## [2.0.0] - 2019-01-13
 ### Added
 - Front-end (ReactJS)
 
 ### Changed
-- Rewrote functions.
+- Methods
   
 ### Removed
 - PostgreSQL integration.
@@ -24,6 +24,6 @@
 
 ## [1.0.0] - 2018-11-26
 
-- A simple API with POST and GET methods
-- Implementing PostgreSQL
+- A simple RESTful API with POST and GET methods
+- Implement PostgreSQL
 - Live on Heroku
