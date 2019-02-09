@@ -6,6 +6,7 @@
   * [flask_restful](https://github.com/flask-restful/flask-restful)
   * [flask_cors](https://github.com/corydolphin/flask-cors)
   * [ReDoc](https://github.com/Rebilly/ReDoc)
+  * [Flask-SocketIO](https://github.com/miguelgrinberg/Flask-SocketIO)
 
 Documentation : <https://todo-api-doc.netlify.com/>
 
@@ -21,9 +22,7 @@ _WARNING: Data for tasks resides in memory not database, hence the newly saved t
 4. `python api.py`
 
 
-### End-points:
-
-* GET : `/todos`
+### End-point:
 
 Response:
 ```JSON
@@ -43,41 +42,6 @@ Response:
 ```
 _Note: color is an additional field to mark grouping/priority of tasks_
 
-* POST : `/todos`
-
-Body:
-```JSON
-  {
-    "task": "<fill in the task>",
-    "color": "<fill in the color>"
-  }
-  ```  
-
-Response: (newly created task returned)
-```JSON
-201 CREATED
-  {
-    "id": "<id:int>",
-    "task": "<newTask>",
-    "color": "<newColor>"
-  }
-```
-* DELETE : `/todos`
-
-Body:
-```JSON
-  {
-    "id": "<fill in the id>"
-  }
-```
-
-Response:
-```JSON
-200 OK
-  {
-    "message": "todo deleted"
-  }
-```
 
 ## License
 MIT

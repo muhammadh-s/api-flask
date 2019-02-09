@@ -1,5 +1,6 @@
-# To-Do
-> A web app for task management (Now implements WebSocket protocol)
+# To-Do 
+> A web app for task management 
+#### (Now implements Websocket protocol)
 
 ![](screenshot.png?raw=true)
 
@@ -10,6 +11,7 @@
 - [react-toastify](https://github.com/fkhadra/react-toastify)
 - [tachyons](https://github.com/tachyons-css/tachyons/)
 - [todo-api](/backend)
+- [socket.io-client](https://github.com/socketio/socket.io-client)
 
 ## Setup
 
@@ -20,7 +22,7 @@
 
 
 ## Changelog
-[Changelog](/CHANGELOG.md)
+Refer to the following file : [Changelog](/CHANGELOG.md)
 
 ## License
 MIT
