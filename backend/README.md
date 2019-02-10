@@ -3,12 +3,10 @@
 
 #### Built with (but not limited to) :
   * [flask](https://github.com/pallets/flask)
-  * [flask_restful](https://github.com/flask-restful/flask-restful)
-  * [flask_cors](https://github.com/corydolphin/flask-cors)
   * [Flask-SocketIO](https://github.com/miguelgrinberg/Flask-SocketIO)
 
 
-API link : <wss://todo-api-websocket.herokuapp.com/>
+API link : `wss://todo-api-websocket.herokuapp.com/`
 
 _WARNING: Data for tasks resides in memory not database, hence the newly saved tasks gets removed when the Heroku Dyno sleeps. Feel free to use endpoints for practice or experimentation._
 

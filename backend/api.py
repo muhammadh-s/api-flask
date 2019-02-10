@@ -25,11 +25,11 @@ TODOS = [
 @socketio.on('delete')
 def handle_message(id):
     TODOS[:] = [d for d in TODOS if d.get('id') != id]
-    send(TODOS)
+    send(TODOS, broadcast=True)
 
 @socketio.on('connect')
 def test_connect():
-    emit('initial', TODOS)
+    send(TODOS, broadcast=True)
 
 @socketio.on('message')
 def handle_task(task, color):
@@ -41,7 +41,7 @@ def handle_task(task, color):
         'color': color
     }
     TODOS.append(dict(this))
-    send(TODOS)
+    send(TODOS, broadcast=True)
 
 if __name__ == '__main__':
     socketio.run(app)

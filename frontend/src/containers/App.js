@@ -17,20 +17,17 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      todos: [],
+      todos: false,
       insertField: '',
       color: 'yellow',
-      fetchInProgress: false,
     }
-
   }
-
+ 
   componentDidMount() {
-    this.setState({ fetchInProgress: true })
     socket.on('initial', (data) => {
       this.setState({ todos: data })
     });
-    this.setState({ fetchInProgress: false })
+    
     socket.on('message', (data) => {
       this.setState({ todos: data })
     });
@@ -92,9 +89,8 @@ class App extends Component {
     const { todos } = this.state;
 
     return (
-      this.state.fetchInProgress ?
-        <Spinner />
-        :
+      this.state.todos
+      ?
         <div className='tc'>
           <img
             src={Logo}
@@ -127,6 +123,9 @@ class App extends Component {
             'https://github.com/muhammadh-s/todo-app'
           } />
         </div>
+        :
+        <Spinner />
+        
     )
   }
 }
