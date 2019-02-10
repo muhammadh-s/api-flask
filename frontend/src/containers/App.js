@@ -33,22 +33,6 @@ class App extends Component {
     });
   }
 
-  notify = (message, type) => {
-    switch (type) {
-      case 'error':
-        toast.error(message);
-        break;
-      case 'success':
-        toast.success(message);
-        break;
-      case 'warning':
-        toast.warning(message);
-        break;
-      default:
-        toast(message)
-    }
-  }
-
   onChange = (event) => {
     this.setState({ insertField: event.target.value });
   }
@@ -63,10 +47,7 @@ class App extends Component {
   onSubmit = () => {
     const { insertField, color } = this.state;
     if (insertField.length === 0)
-      this.notify(
-        "The text box cannot be left blank",
-        'error'
-      )
+      toast.error("The text box cannot be left blank")
     else
     socket.send(insertField, color);
 
