@@ -3,7 +3,7 @@ from flask_socketio import SocketIO, emit, send
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
-socketio = SocketIO(app)
+socketio = SocketIO(app, engineio_logger = True)
 
 text = '''Lorem ipsum dolor sit amet,
     consectetur adipisicing elit,
