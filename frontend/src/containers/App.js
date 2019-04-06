@@ -11,7 +11,7 @@ import 'react-toastify/dist/ReactToastify.min.css';
 import './App.css';
 import io from 'socket.io-client';
 
-const socket = io('localhost:5000',{
+const socket = io('wss://todo-api-websocket.herokuapp.com/',{
   transports: ['websocket']
 });
 
